@@ -110,8 +110,12 @@ class HexCodeExtension(Extension):
 
     @staticmethod
     def return_results(hexadecimal, rgb, hsv, hsl, cmyk):
-        img = Image.new('RGB', (40, 40), color = str(hexadecimal))
+        img = Image.new('RGB', (1000, 100), color = str(hexadecimal))
         img.save('/tmp/colorconverter.png')
+        
+        logger.info('hexadecimal value: ' + hexadecimal)
+        ExtensionResultItem.icon = '/tmp/colorconverter.png'
+        
         return [
             ExtensionResultItem(
                 icon='/tmp/colorconverter.png',
