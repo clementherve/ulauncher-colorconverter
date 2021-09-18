@@ -113,7 +113,7 @@ class HexCodeExtension(Extension):
     def return_results(hexadecimal, rgb, hsv, hsl, cmyk):
 
         # remove any previous files
-        files = glob("/tmp/colorconverter-*.png")
+        files = glob.glob("/tmp/colorconverter-*.png")
         for file in files:
             os.remove(file)
         
