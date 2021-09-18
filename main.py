@@ -8,7 +8,8 @@ from ulauncher.api.shared.event import KeywordQueryEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 
 from PIL import Image
-from time import time
+import glob, os
+
 import converter
 
 logger = logging.getLogger(__name__)
@@ -111,19 +112,21 @@ class HexCodeExtension(Extension):
     @staticmethod
     def return_results(hexadecimal, rgb, hsv, hsl, cmyk):
 
-        filename = '/tmp/' + str(hexadecimal[1:]) + '.png'
-
+        # remove any previous files
+        files = glob("/tmp/colorconverter-*.png")
+        for file in files:
+            os.remove(file)
+        
+        # recreate new one
+        filename = '/tmp/colorconverter-' + str(hexadecimal[1:]) + '.png'
         img = Image.new('RGB', (100, 100), color = str(hexadecimal))
         img.save(filename)
-        # logger.info('hexadecimal value: ' + hexadecimal)
-        # ExtensionResultItem.icon = '/tmp/colorconverter.png'
-        # return hexadecimal
-        
+
         return [
             ExtensionResultItem(
                 icon=filename,
                 name=hexadecimal,
-                description='HEX: ' + str(hexadecimal),
+                description='HEX',
                 on_enter=CopyToClipboardAction(hexadecimal)
             ),
             ExtensionResultItem(
