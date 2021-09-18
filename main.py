@@ -111,40 +111,41 @@ class HexCodeExtension(Extension):
     @staticmethod
     def return_results(hexadecimal, rgb, hsv, hsl, cmyk):
 
+        filename = '/tmp/' + str(hexadecimal[1:]) + '.png'
+
         img = Image.new('RGB', (100, 100), color = str(hexadecimal))
-        img.save('/tmp/colorconverter.png')
-        
+        img.save(filename)
         # logger.info('hexadecimal value: ' + hexadecimal)
         # ExtensionResultItem.icon = '/tmp/colorconverter.png'
         # return hexadecimal
         
         return [
             ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
+                icon=filename,
                 name=hexadecimal,
                 description='HEX: ' + str(hexadecimal),
                 on_enter=CopyToClipboardAction(hexadecimal)
             ),
             ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
+                icon=filename,
                 name=converter.normalize_rgb(rgb),
                 description='RGB',
                 on_enter=CopyToClipboardAction(converter.normalize_rgb(rgb))
             ),
             ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
+                icon=filename,
                 name=converter.normalize_hsl_hsv(hsv),
                 description='HSV',
                 on_enter=CopyToClipboardAction(converter.normalize_hsl_hsv(hsv))
             ),
             ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
+                icon=filename,
                 name=converter.normalize_hsl_hsv(hsl),
                 description='HSL',
                 on_enter=CopyToClipboardAction(converter.normalize_hsl_hsv(hsl))
             ),
             ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
+                icon=filename,
                 name=converter.normalize_cmyk(cmyk),
                 description='CMYK',
                 on_enter=CopyToClipboardAction(converter.normalize_cmyk(cmyk))
