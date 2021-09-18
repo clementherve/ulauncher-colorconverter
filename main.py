@@ -122,7 +122,7 @@ class HexCodeExtension(Extension):
             ExtensionResultItem(
                 icon='/tmp/colorconverter.png',
                 name=hexadecimal,
-                description='HEX: ' + str(hexadecimal) + " @ " + str(time.time()),
+                description='HEX: ' + str(hexadecimal),
                 on_enter=CopyToClipboardAction(hexadecimal)
             ),
             ExtensionResultItem(
