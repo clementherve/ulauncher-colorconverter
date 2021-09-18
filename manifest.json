@@ -1,8 +1,8 @@
 {
     "required_api_version": "^2.0.0",
     "name": "Color converter",
-    "description": "Color converter helps you to convert color codes in multiple formats",
-    "developer_name": "Sergio Fernández Celorio",
+    "description": "Color converter helps you visualize and convert colors",
+    "developer_name": "Sergio Fernández Celorio, Clément Hervé",
     "icon": "images/icon.png",
     "options": {
         "query_debounce": 0.05
