@@ -8,7 +8,7 @@ from ulauncher.api.shared.event import KeywordQueryEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 
 from PIL import Image
-     
+from time import time
 import converter
 
 logger = logging.getLogger(__name__)
@@ -122,7 +122,7 @@ class HexCodeExtension(Extension):
             ExtensionResultItem(
                 icon='/tmp/colorconverter.png',
                 name=hexadecimal,
-                description='HEX: ' + hexadecimal,
+                description='HEX: ' + str(hexadecimal) + " @ " + str(time.time()),
                 on_enter=CopyToClipboardAction(hexadecimal)
             ),
             ExtensionResultItem(
@@ -155,30 +155,23 @@ class HexCodeExtension(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
-        items = [
-            ExtensionResultItem(
-                icon='/tmp/colorconverter.png',
-                name="test",
-                description='test',
-                on_enter=CopyToClipboardAction("test")
-            )
-        ]
+        items = []
 
-        # text = event.get_argument() or ""
-        # if event.get_keyword() == extension.preferences.get("color_converter_hex"):
-        #     return RenderResultListAction(extension.hexadecimal(text))
+        text = event.get_argument() or ""
+        if event.get_keyword() == extension.preferences.get("color_converter_hex"):
+            return RenderResultListAction(extension.hexadecimal(text))
 
-        # if event.get_keyword() == extension.preferences.get("color_converter_rgb"):
-        #     return RenderResultListAction(extension.rgb(text))
+        if event.get_keyword() == extension.preferences.get("color_converter_rgb"):
+            return RenderResultListAction(extension.rgb(text))
 
-        # if event.get_keyword() == extension.preferences.get("color_converter_hsv"):
-        #     return RenderResultListAction(extension.hsv(text))
+        if event.get_keyword() == extension.preferences.get("color_converter_hsv"):
+            return RenderResultListAction(extension.hsv(text))
 
-        # if event.get_keyword() == extension.preferences.get("color_converter_hsl"):
-        #     return RenderResultListAction(extension.hsl(text))
+        if event.get_keyword() == extension.preferences.get("color_converter_hsl"):
+            return RenderResultListAction(extension.hsl(text))
 
-        # if event.get_keyword() == extension.preferences.get("color_converter_cmyk"):
-        #     return RenderResultListAction(extension.cmyk(text))
+        if event.get_keyword() == extension.preferences.get("color_converter_cmyk"):
+            return RenderResultListAction(extension.cmyk(text))
 
         return RenderResultListAction(items)
 
