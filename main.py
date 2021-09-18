@@ -7,6 +7,8 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.event import KeywordQueryEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 
+from PIL import Image
+     
 import converter
 
 logger = logging.getLogger(__name__)
@@ -108,33 +110,35 @@ class HexCodeExtension(Extension):
 
     @staticmethod
     def return_results(hexadecimal, rgb, hsv, hsl, cmyk):
+        img = Image.new('RGB', (40, 40), color = str(hexadecimal))
+        img.save('/tmp/colorconverter.png')
         return [
             ExtensionResultItem(
-                icon='images/icon.png',
+                icon='/tmp/colorconverter.png',
                 name=hexadecimal,
                 description='HEX',
                 on_enter=CopyToClipboardAction(hexadecimal)
             ),
             ExtensionResultItem(
-                icon='images/icon.png',
+                icon='/tmp/colorconverter.png',
                 name=converter.normalize_rgb(rgb),
                 description='RGB',
                 on_enter=CopyToClipboardAction(converter.normalize_rgb(rgb))
             ),
             ExtensionResultItem(
-                icon='images/icon.png',
+                icon='/tmp/colorconverter.png',
                 name=converter.normalize_hsl_hsv(hsv),
                 description='HSV',
                 on_enter=CopyToClipboardAction(converter.normalize_hsl_hsv(hsv))
             ),
             ExtensionResultItem(
-                icon='images/icon.png',
+                icon='/tmp/colorconverter.png',
                 name=converter.normalize_hsl_hsv(hsl),
                 description='HSL',
                 on_enter=CopyToClipboardAction(converter.normalize_hsl_hsv(hsl))
             ),
             ExtensionResultItem(
-                icon='images/icon.png',
+                icon='/tmp/colorconverter.png',
                 name=converter.normalize_cmyk(cmyk),
                 description='CMYK',
                 on_enter=CopyToClipboardAction(converter.normalize_cmyk(cmyk))
